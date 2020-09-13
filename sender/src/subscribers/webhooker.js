@@ -37,14 +37,22 @@ class Webhooker {
                 error: true,
                 code: e.code,
                 message: e.message,
-                stack: e.stack,
+                stack: e.stack
             };
+
+            this.retry(content);
         }
 
         this.logger.info(result);
+        this.broker.sendMessage(process.env.HISTORY_QUEUE, JSON.stringify(result));
         this.broker.ack(process.env.WEBHOOK_QUEUE, msg);
 
         return result;
+    }
+
+    retry(content) {
+        content.retry = content.retry ? content.retry++ : 1;
+        this.broker.sendMessage(process.env.RETRY_QUEUE, JSON.stringify(content));
     }
 }
 
