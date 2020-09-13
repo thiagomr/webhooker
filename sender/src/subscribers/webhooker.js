@@ -35,6 +35,7 @@ class Webhooker {
                 responseBody: e.isAxiosError && e.response && e.response.data ? e.response.data : null,
                 responseStatus: e.isAxiosError && e.response && e.response.status ? e.response.status : null,
                 error: true,
+                code: e.code,
                 message: e.message,
                 stack: e.stack,
             };

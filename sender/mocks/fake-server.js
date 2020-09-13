@@ -14,8 +14,8 @@ app.post('/error', (req, res) => {
 
 app.get('/timeout', (req, res) => {
     setTimeout(() => {
-        return res.send(200);
-    }, 5000);
+        return res.status(200).send('ok');
+    }, 2000);
 });
 
 app.listen(5000, () => console.log('listen at 5000'));
