@@ -41,7 +41,11 @@ services:
         build: ./sender
         container_name: sender
         logging: *default-logging
+        environment:
+            - RABBITMQ_HOST=root:toor@rabbitmq
     history:
         image: ./history
         container_name: history
         logging: *default-logging
+        environment:
+            - RABBITMQ_HOST=root:toor@rabbitmq
