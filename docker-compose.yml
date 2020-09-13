@@ -43,6 +43,7 @@ services:
         logging: *default-logging
         environment:
             - RABBITMQ_HOST=root:toor@rabbitmq
+            - WEBHOOK_QUEUE=webhook
     history:
         build: ./history
         container_name: history

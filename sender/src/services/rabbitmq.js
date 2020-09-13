@@ -47,7 +47,7 @@ class RabbitMq {
         }
     }
 
-    async assertQueue(queue, config = {}, concurrency = 1) {
+    async assertQueue(queue, concurrency = 1, config = {}) {
         try {
             this.logger.info('[rabbitmq] - assert queue', queue);
             this.channels[queue] = await this.createChannel(queue);
