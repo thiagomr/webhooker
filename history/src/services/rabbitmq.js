@@ -21,7 +21,7 @@ class RabbitMq {
                 process.exit(1);
             });
 
-            this.logger.info(`[rabbitmq] - connected at port ${process.env.RABBITMQ_HOST}`);
+            this.logger.info(`[rabbitmq] connected at port ${process.env.RABBITMQ_HOST}`);
         } catch (e) {
             throw e;
         }
@@ -49,7 +49,7 @@ class RabbitMq {
 
     async assertQueue(queue, config = {}, concurrency = 1) {
         try {
-            this.logger.info('[rabbitmq] - assert queue', queue);
+            this.logger.info('[rabbitmq] assert queue', queue);
             this.channels[queue] = await this.createChannel(queue);
             this.channels[queue].prefetch(concurrency);
 
@@ -75,7 +75,7 @@ class RabbitMq {
                 throw new Error(`channel not exists - ${queue}`);
             }
 
-            this.logger.info('[rabbitmq] - subscriber', queue);
+            this.logger.info('[rabbitmq] subscriber', queue);
             this.channels[queue].consume(queue, callback, options);
         } catch (e) {
             throw e;
