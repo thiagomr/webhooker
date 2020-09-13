@@ -23,3 +23,9 @@ Start on dev mode
 ```bash
 npm start:dev
 ```
+
+Run tests
+
+```bash
+npm test
+```
