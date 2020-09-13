@@ -1,0 +1,47 @@
+version: '3.4'
+x-logging:
+    &default-logging
+    options:
+      max-size: '10m'
+      max-file: '1'
+    driver: json-file
+services:
+    portainer:
+        image: portainer/portainer
+        container_name: portainer
+        restart: on-failure
+        ports:
+            - "9000:9000"
+        volumes:
+           - /var/run/docker.sock:/var/run/docker.sock
+           - ${VOLUMES_DIR}/portainer:/data
+        logging: *default-logging
+    mongo:
+        image: mongo:latest
+        volumes:
+            - ${VOLUMES_DIR}/mongodb:/data/db
+        container_name: mongo
+        ports:
+            - 27017:27017
+        logging: *default-logging
+    rabbitmq:
+        image: rabbitmq:3-management
+        container_name: rabbitmq
+        ports:
+            - "15672:15672"
+            - "5672:5672"
+        volumes:
+            - ${VOLUMES_DIR}/rabbitmq:/var/lib/rabbitmq
+        environment:
+            - RABBITMQ_ERLANG_COOKIE=cookie
+            - RABBITMQ_DEFAULT_USER=root
+            - RABBITMQ_DEFAULT_PASS=toor
+        logging: *default-logging
+    sender:
+        build: ./sender
+        container_name: sender
+        logging: *default-logging
+    history:
+        image: ./history
+        container_name: history
+        logging: *default-logging
