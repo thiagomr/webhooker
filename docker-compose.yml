@@ -44,9 +44,14 @@ services:
         environment:
             - RABBITMQ_HOST=root:toor@rabbitmq
             - WEBHOOK_QUEUE=webhook
+            - HISTORY_QUEUE=history
+            - RETRY_QUEUE=retry
     history:
         build: ./history
         container_name: history
         logging: *default-logging
         environment:
             - RABBITMQ_HOST=root:toor@rabbitmq
+            - HISTORY_QUEUE=history
+            - MONGO_HOST=mongo
+            - MONGO_SCHEMA=webhooker
