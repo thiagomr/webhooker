@@ -9,7 +9,7 @@
     "generate": "node src/cli.js",
     "lint": "eslint . --ext .js",
     "lint:fix": "eslint . --ext .js --fix",
-    "test": "jest"
+    "test": "jest --forceExit"
   },
   "husky": {
     "hooks": {
