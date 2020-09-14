@@ -7,7 +7,7 @@ A scalable webhook processor to send HTTP requests
 Running services
 
 ```bash
-    bash script.sh up
+    bash script.sh up <optional name to run a specific service>
 ```
 
 Stopping services
