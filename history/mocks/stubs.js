@@ -3,7 +3,7 @@ module.exports.fakeMessage = () => {
         content: JSON.stringify({
             key: 'foobar',
             data: {},
-            date: new Date(),
+            date: '2020-09-13T18:47:00.215Z',
             responseBody: {
                 message: 'ok'
             },
