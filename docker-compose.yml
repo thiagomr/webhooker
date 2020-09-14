@@ -37,10 +37,12 @@ services:
             - RABBITMQ_DEFAULT_USER=root
             - RABBITMQ_DEFAULT_PASS=toor
         logging: *default-logging
+        restart: always
     sender:
         build: ./sender
         container_name: sender
         logging: *default-logging
+        restart: on-failure
         environment:
             - RABBITMQ_HOST=root:toor@rabbitmq
             - WEBHOOK_QUEUE=webhook
@@ -50,6 +52,7 @@ services:
         build: ./history
         container_name: history
         logging: *default-logging
+        restart: on-failure
         environment:
             - RABBITMQ_HOST=root:toor@rabbitmq
             - HISTORY_QUEUE=history
